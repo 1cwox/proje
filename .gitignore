@@ -1,0 +1,19 @@
+__pycache__/
+*.pyc
+instance/
+.env
+*.sqlite3
+*.db
+*.log
+# Yedek dosyalar
+*.bak
+# Render/IDE dosyaları
+.vscode/
+.idea/
+# Kişisel dosyalar
+.DS_Store
+# Yüklenen dosyalar (isteğe bağlı, galeri ve profil fotoğrafları hariç)
+# static/uploads/
+# static/profiles/
+# Timeline verisi (isteğe bağlı, yedeklemek istemiyorsan aç)
+timeline.json 

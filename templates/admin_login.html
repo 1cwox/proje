@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Girişi</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body { background: linear-gradient(135deg, #ffeef8 0%, #f8f0ff 100%); font-family: 'Quicksand', Arial, sans-serif; min-height: 100vh; display: flex; align-items: center; justify-content: center; }
+        .login-box { background: #fff; padding: 32px 28px; border-radius: 18px; box-shadow: 0 4px 24px #f8bbd0; min-width: 320px; }
+        h2 { color: #d63384; text-align: center; margin-bottom: 24px; }
+        input[type=text], input[type=password] { width: 100%; padding: 12px; margin: 10px 0 18px 0; border: 1px solid #eee; border-radius: 8px; font-size: 1rem; }
+        button { width: 100%; background: #d63384; color: #fff; border: none; border-radius: 8px; padding: 12px; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: background 0.2s; }
+        button:hover { background: #ad1457; }
+        .error { color: #fff; background: #ff6f91; padding: 8px 0; border-radius: 6px; text-align: center; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <form class="login-box" method="post">
+        <h2>Admin Girişi</h2>
+        {% if error %}<div class="error">{{ error }}</div>{% endif %}
+        <input type="text" name="username" placeholder="Kullanıcı Adı" required autofocus>
+        <input type="password" name="password" placeholder="Şifre" required>
+        <button type="submit">Giriş Yap</button>
+    </form>
+</body>
+</html> 

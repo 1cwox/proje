@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ couple.names }} - Aşkımızın Hikayesi ❤️</title>
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;600;700&family=Nunito:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Quicksand', 'Nunito', Arial, sans-serif; background: linear-gradient(135deg, #ffeef8 0%, #f8f0ff 100%); min-height: 100vh; color: #5a5a5a; }
+        .container { max-width: 1200px; margin: 0 auto; padding: 20px; }
+        /* Profil Bölümü */
+        .profile-section { text-align: center; margin-bottom: 50px; padding: 40px 20px; background: rgba(255,255,255,0.6); border-radius: 30px; backdrop-filter: blur(10px); box-shadow: 0 8px 32px rgba(255,182,193,0.3); }
+        .profiles { display: flex; justify-content: center; align-items: center; gap: 50px; margin-bottom: 30px; }
+        .profile { text-align: center; position: relative; }
+        .profile-img { width: 150px; height: 150px; border-radius: 50%; border: 4px solid #ffb6c1; object-fit: cover; box-shadow: 0 10px 30px rgba(255,182,193,0.4); transition: transform 0.3s ease; }
+        .profile-img:hover { transform: scale(1.05); }
+        .profile-name { font-family: 'Quicksand', 'Nunito', Arial, sans-serif; font-size: 2rem; color: #d63384; margin-top: 15px; font-weight: 700; letter-spacing: 1px; }
+        .heart-divider { font-size: 2rem; color: #ff69b4; animation: heartbeat 2s infinite; }
+        @keyframes heartbeat { 0%,100%{transform:scale(1);} 50%{transform:scale(1.1);} }
+        /* Anılar Bölümü */
+        .memories-section { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 50px; }
+        .memory-box { background: rgba(255,255,255,0.8); padding: 30px; border-radius: 20px; text-align: center; box-shadow: 0 8px 25px rgba(255,182,193,0.2); transition: transform 0.3s ease; }
+        .memory-box:hover { transform: translateY(-5px); }
+        .memory-icon { font-size: 3rem; margin-bottom: 15px; }
+        .memory-title { font-family: 'Quicksand', 'Nunito', Arial, sans-serif; font-size: 1.5rem; color: #d63384; margin-bottom: 10px; font-weight: 700; }
+        .memory-text { color: #666; line-height: 1.6; }
+        /* Spotify Bölümü */
+        .spotify-section { background: rgba(255,255,255,0.7); padding: 40px; border-radius: 25px; text-align: center; margin-bottom: 50px; box-shadow: 0 8px 25px rgba(255,182,193,0.2); }
+        .spotify-title { font-family: 'Quicksand', 'Nunito', Arial, sans-serif; font-size: 2.2rem; color: #d63384; margin-bottom: 20px; font-weight: 700; }
+        .spotify-embed { margin: 0 auto; max-width: 400px; }
+        /* Tanışma Hikayesi */
+        .story-section { background: rgba(255,255,255,0.8); padding: 40px; border-radius: 25px; margin-bottom: 50px; border: 3px solid #ffb6c1; position: relative; box-shadow: 0 8px 25px rgba(255,182,193,0.2); }
+        .story-section::before { content: "🌸"; position: absolute; top: -15px; left: 30px; background: #ffeef8; padding: 5px 10px; border-radius: 50%; font-size: 1.5rem; }
+        .story-title { font-family: 'Quicksand', 'Nunito', Arial, sans-serif; font-size: 2.2rem; color: #d63384; text-align: center; margin-bottom: 25px; font-weight: 700; }
+        .story-text { line-height: 1.8; font-size: 1.1rem; color: #555; text-align: justify; }
+        /* Galeri */
+        .gallery-section { margin-bottom: 50px; }
+        .gallery-title { font-family: 'Quicksand', 'Nunito', Arial, sans-serif; font-size: 2.2rem; color: #d63384; text-align: center; margin-bottom: 30px; font-weight: 700; }
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; }
+        .gallery-item { background: rgba(255,255,255,0.8); border-radius: 15px; overflow: hidden; box-shadow: 0 8px 25px rgba(255,182,193,0.2); transition: transform 0.3s ease; }
+        .gallery-item:hover { transform: scale(1.02); }
+        .gallery-img { width: 100%; height: 200px; object-fit: cover; display: block; }
+        /* Timeline */
+        .timeline-section { margin-bottom: 50px; }
+        .timeline-title { font-family: 'Quicksand', 'Nunito', Arial, sans-serif; font-size: 2.2rem; color: #d63384; text-align: center; margin-bottom: 40px; font-weight: 700; }
+        .timeline { position: relative; padding: 20px 0; }
+        .timeline::before { content: ''; position: absolute; top: 0; left: 50%; width: 4px; height: 100%; background: linear-gradient(to bottom, #ffb6c1, #dda0dd); transform: translateX(-50%); }
+        .timeline-item { position: relative; margin: 30px 0; width: 50%; }
+        .timeline-item:nth-child(odd) { left: 0; text-align: right; padding-right: 30px; }
+        .timeline-item:nth-child(even) { left: 50%; text-align: left; padding-left: 30px; }
+        .timeline-content { background: rgba(255,255,255,0.9); padding: 20px; border-radius: 15px; box-shadow: 0 5px 15px rgba(255,182,193,0.3); }
+        .timeline-date { font-weight: 700; color: #d63384; margin-bottom: 5px; }
+        .timeline-text { color: #666; line-height: 1.6; }
+        .timeline-dot { position: absolute; top: 25px; width: 20px; height: 20px; background: #ff69b4; border: 4px solid white; border-radius: 50%; box-shadow: 0 0 10px rgba(255,105,180,0.5); }
+        .timeline-item:nth-child(odd) .timeline-dot { right: -10px; }
+        .timeline-item:nth-child(even) .timeline-dot { left: -10px; }
+        /* Geri Sayım */
+        .countdown-section { background: linear-gradient(135deg, #ff69b4, #dda0dd); padding: 40px; border-radius: 25px; text-align: center; color: white; box-shadow: 0 8px 25px rgba(255,105,180,0.4); }
+        .countdown-title { font-family: 'Quicksand', 'Nunito', Arial, sans-serif; font-size: 2.2rem; margin-bottom: 30px; font-weight: 700; }
+        .countdown-timer { display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; }
+        .countdown-item { background: rgba(255,255,255,0.2); padding: 20px; border-radius: 15px; min-width: 100px; backdrop-filter: blur(10px); }
+        .countdown-number { font-size: 2.5rem; font-weight: 700; display: block; }
+        .countdown-label { font-size: 0.9rem; opacity: 0.9; margin-top: 5px; }
+        /* Responsive */
+        @media (max-width: 768px) {
+            .profiles { flex-direction: column; gap: 30px; }
+            .profile-img { width: 120px; height: 120px; }
+            .profile-name { font-size: 1.5rem; }
+            .timeline::before { left: 20px; }
+            .timeline-item { width: 100%; left: 0 !important; text-align: left !important; padding-left: 50px !important; padding-right: 0 !important; }
+            .timeline-dot { left: 10px !important; right: auto !important; }
+            .countdown-timer { gap: 15px; }
+            .countdown-item { min-width: 80px; padding: 15px; }
+            .countdown-number { font-size: 2rem; }
+            #add-memory-btn { width:40px;height:40px;font-size:1.5rem;top:-15px;right:-5px; }
+            #new-memory-preview img { max-width: 100%; }
+            #add-gallery-btn { width:32px;height:32px;font-size:1.2rem; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Profil Bölümü -->
+        <div class="profile-section">
+            <div class="profiles">
+                <div class="profile" style="position:relative;">
+                    <img src="/static/profiles/kiz.jpg" alt="Profil 1" class="profile-img" id="kiz-profile-img">
+                    <div class="profile-name">{{ couple.names.split('&')[0].strip() }}</div>
+                    {% if is_admin %}
+                    <button class="edit-profile-btn" data-which="kiz.jpg" title="Düzenle" style="position:absolute;top:10px;left:10px;background:rgba(255,255,255,0.8);border:none;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#d63384;box-shadow:0 2px 8px #f8bbd0;cursor:pointer;z-index:2;">✏️</button>
+                    <input type="file" class="profile-file-input" data-which="kiz.jpg" accept="image/*" style="display:none;">
+                    {% endif %}
+                </div>
+                <div class="heart-divider">💕</div>
+                <div class="profile" style="position:relative;">
+                    <img src="/static/profiles/erkek.jpg" alt="Profil 2" class="profile-img" id="erkek-profile-img">
+                    <div class="profile-name">{{ couple.names.split('&')[1].strip() }}</div>
+                    {% if is_admin %}
+                    <button class="edit-profile-btn" data-which="erkek.jpg" title="Düzenle" style="position:absolute;top:10px;left:10px;background:rgba(255,255,255,0.8);border:none;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#d63384;box-shadow:0 2px 8px #f8bbd0;cursor:pointer;z-index:2;">✏️</button>
+                    <input type="file" class="profile-file-input" data-which="erkek.jpg" accept="image/*" style="display:none;">
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+        <!-- Anılar Bölümü (örnek: ilk mesaj, ilk buluşma) -->
+        <div class="memories-section">
+            <div class="memory-box">
+                <div class="memory-icon">📨</div>
+                <div class="memory-title">İlk Mesajımız</div>
+                <div class="memory-text">{{ timeline[0].desc }}</div>
+            </div>
+            <div class="memory-box">
+                <div class="memory-icon">☕</div>
+                <div class="memory-title">İlk Buluşmamız</div>
+                <div class="memory-text">{{ timeline[1].desc }}</div>
+            </div>
+        </div>
+        <!-- Spotify Bölümü -->
+        <div class="spotify-section">
+            <div class="spotify-title">Aşk Şarkılarımız 🎵</div>
+            <div class="spotify-embed">
+                <iframe src="{{ couple.spotify | replace('playlist/', 'embed/playlist/') }}" width="100%" height="80" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe>
+            </div>
+        </div>
+        <!-- Tanışma Hikayesi -->
+        <div class="story-section">
+            <div class="story-title">Tanışma Hikayemiz</div>
+            <div class="story-text">{{ couple.story }}</div>
+        </div>
+        <!-- Galeri -->
+        <div class="gallery-section">
+            <div class="gallery-title" style="display:flex;align-items:center;justify-content:center;gap:10px;">
+                Anılarımız 📷
+                {% if is_admin %}
+                <button id="add-gallery-btn" title="Fotoğraf ekle" style="background:#fff;border:none;border-radius:50%;width:38px;height:38px;box-shadow:0 2px 8px #f8bbd0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:#d63384;transition:background 0.2s;outline:none;">+</button>
+                <input type="file" id="gallery-file-input" accept="image/*" style="display:none;">
+                {% endif %}
+            </div>
+            <div class="gallery-grid" id="gallery-grid">
+                {% for img in gallery %}
+                <div class="gallery-item" style="position:relative;">
+                    <img src="/static/{{ img }}" alt="Galeri Fotoğrafı" class="gallery-img">
+                    {% if is_admin %}
+                    <button class="delete-photo-btn" data-filename="{{ img }}" title="Sil" style="position:absolute;top:8px;right:8px;background:rgba(255,255,255,0.8);border:none;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#d63384;box-shadow:0 2px 8px #f8bbd0;cursor:pointer;z-index:2;">🗑️</button>
+                    {% endif %}
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- Timeline -->
+        <div class="timeline-section">
+            <div class="timeline-title" style="display:flex;align-items:center;justify-content:center;gap:10px;">
+                Aşk Tarihçemiz 💕
+                {% if is_admin %}
+                <button id="add-timeline-btn" title="Olay ekle" style="background:#fff;border:none;border-radius:50%;width:38px;height:38px;box-shadow:0 2px 8px #f8bbd0;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1.6rem;color:#d63384;transition:background 0.2s;outline:none;">+</button>
+                {% endif %}
+            </div>
+            {% if is_admin %}
+            <form id="timeline-form" style="display:none;justify-content:center;gap:10px;margin:20px 0;flex-wrap:wrap;">
+                <input type="date" id="timeline-date" required style="padding:8px 12px;border-radius:8px;border:1px solid #eee;">
+                <input type="text" id="timeline-title" placeholder="Olay Başlığı" required style="padding:8px 12px;border-radius:8px;border:1px solid #eee;min-width:120px;">
+                <input type="text" id="timeline-desc" placeholder="Açıklama" required style="padding:8px 12px;border-radius:8px;border:1px solid #eee;min-width:180px;">
+                <button type="submit" style="background:#d63384;color:#fff;border:none;border-radius:8px;padding:8px 18px;font-weight:600;">Ekle</button>
+            </form>
+            {% endif %}
+            <div class="timeline" id="timeline-list">
+                {% for event in timeline %}
+                <div class="timeline-item">
+                    <div class="timeline-content">
+                        <div class="timeline-date">{{ event.date }}</div>
+                        <div class="timeline-text">{{ event.title }} - {{ event.desc }}</div>
+                    </div>
+                    <div class="timeline-dot"></div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        <!-- Geri Sayım -->
+        <div class="countdown-section">
+            <div class="countdown-title">Bir Sonraki Yıldönümüze 💖</div>
+            <div class="countdown-timer">
+                <div class="countdown-item">
+                    <span class="countdown-number" id="days">000</span>
+                    <span class="countdown-label">Gün</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="hours">00</span>
+                    <span class="countdown-label">Saat</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="minutes">00</span>
+                    <span class="countdown-label">Dakika</span>
+                </div>
+                <div class="countdown-item">
+                    <span class="countdown-number" id="seconds">00</span>
+                    <span class="countdown-label">Saniye</span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Geri sayım fonksiyonu
+        function updateCountdown() {
+            const targetDate = new Date("{{ countdown.target_date }}").getTime();
+            const now = new Date().getTime();
+            const timeLeft = targetDate - now;
+            if (timeLeft > 0) {
+                const days = Math.floor(timeLeft / (1000 * 60 * 60 * 24));
+                const hours = Math.floor((timeLeft % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const minutes = Math.floor((timeLeft % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((timeLeft % (1000 * 60)) / 1000);
+                document.getElementById('days').textContent = days.toString().padStart(3, '0');
+                document.getElementById('hours').textContent = hours.toString().padStart(2, '0');
+                document.getElementById('minutes').textContent = minutes.toString().padStart(2, '0');
+                document.getElementById('seconds').textContent = seconds.toString().padStart(2, '0');
+            } else {
+                document.getElementById('days').textContent = '000';
+                document.getElementById('hours').textContent = '00';
+                document.getElementById('minutes').textContent = '00';
+                document.getElementById('seconds').textContent = '00';
+            }
+        }
+        updateCountdown();
+        setInterval(updateCountdown, 1000);
+    </script>
+    {% if is_admin %}
+    <script>
+    // Galeriye fotoğraf ekleme
+    const addGalleryBtn = document.getElementById('add-gallery-btn');
+    const galleryFileInput = document.getElementById('gallery-file-input');
+    const galleryGrid = document.getElementById('gallery-grid');
+    if(addGalleryBtn && galleryFileInput) {
+        addGalleryBtn.addEventListener('click', () => galleryFileInput.click());
+        galleryFileInput.addEventListener('change', function() {
+            if (this.files && this.files[0]) {
+                const formData = new FormData();
+                formData.append('file', this.files[0]);
+                fetch('/upload', { method: 'POST', body: formData })
+                    .then(r => r.json())
+                    .then(data => {
+                        if(data.success) {
+                            const div = document.createElement('div');
+                            div.className = 'gallery-item';
+                            div.style.position = 'relative';
+                            div.innerHTML = `<img src='/static/${data.filename}' alt='Yeni Fotoğraf' class='gallery-img'>` +
+                                `<button class='delete-photo-btn' data-filename='${data.filename}' title='Sil' style='position:absolute;top:8px;right:8px;background:rgba(255,255,255,0.8);border:none;border-radius:50%;width:32px;height:32px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:#d63384;box-shadow:0 2px 8px #f8bbd0;cursor:pointer;z-index:2;'>🗑️</button>`;
+                            galleryGrid.insertBefore(div, galleryGrid.firstChild);
+                        } else { alert(data.error || 'Yükleme hatası'); }
+                    });
+            }
+        });
+    }
+    // Fotoğraf silme
+    function bindDeleteButtons() {
+        document.querySelectorAll('.delete-photo-btn').forEach(btn => {
+            btn.onclick = function() {
+                if(confirm('Bu fotoğrafı silmek istediğinize emin misiniz?')) {
+                    fetch('/delete_photo', {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify({ filename: btn.getAttribute('data-filename') })
+                    })
+                    .then(r => r.json())
+                    .then(data => {
+                        if(data.success) {
+                            btn.parentElement.remove();
+                        } else { alert(data.error || 'Silme hatası'); }
+                    });
+                }
+            }
+        });
+    }
+    bindDeleteButtons();
+    // Yeni eklenen fotoğraflar için de silme butonunu bağla
+    const observer = new MutationObserver(bindDeleteButtons);
+    observer.observe(galleryGrid, { childList: true });
+    </script>
+    <script>
+    // Timeline ekleme butonu ve formu
+    const addTimelineBtn = document.getElementById('add-timeline-btn');
+    const timelineForm = document.getElementById('timeline-form');
+    if(addTimelineBtn && timelineForm) {
+        addTimelineBtn.onclick = () => {
+            timelineForm.style.display = timelineForm.style.display === 'flex' ? 'none' : 'flex';
+        };
+        timelineForm.onsubmit = function(e) {
+            e.preventDefault();
+            const date = document.getElementById('timeline-date').value;
+            const title = document.getElementById('timeline-title').value;
+            const desc = document.getElementById('timeline-desc').value;
+            fetch('/add_timeline', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ date, title, desc })
+            })
+            .then(r => r.json())
+            .then(data => {
+                if(data.success) {
+                    // Yeni olayı en başa ekle
+                    const timelineList = document.getElementById('timeline-list');
+                    const div = document.createElement('div');
+                    div.className = 'timeline-item';
+                    div.innerHTML = `<div class='timeline-content'><div class='timeline-date'>${date}</div><div class='timeline-text'>${title} - ${desc}</div></div><div class='timeline-dot'></div>`;
+                    timelineList.insertBefore(div, timelineList.firstChild);
+                    timelineForm.reset();
+                    timelineForm.style.display = 'none';
+                } else {
+                    alert(data.error || 'Ekleme hatası');
+                }
+            });
+        };
+    }
+    </script>
+    <script>
+    document.querySelectorAll('.edit-profile-btn').forEach(btn => {
+        btn.onclick = function() {
+            const which = btn.getAttribute('data-which');
+            const input = btn.parentElement.querySelector('.profile-file-input');
+            input.click();
+            input.onchange = function() {
+                if (input.files && input.files[0]) {
+                    const formData = new FormData();
+                    formData.append('file', input.files[0]);
+                    formData.append('which', which);
+                    fetch('/update_profile_photo', { method: 'POST', body: formData })
+                        .then(r => r.json())
+                        .then(data => {
+                            if(data.success) {
+                                // Profil görselini güncelle
+                                const img = btn.parentElement.querySelector('img');
+                                img.src = '/static/' + data.filename + '?t=' + Date.now();
+                            } else {
+                                alert(data.error || 'Yükleme hatası');
+                            }
+                        });
+                }
+            };
+        };
+    });
+    </script>
+    {% endif %}
+</body>
+</html> 
