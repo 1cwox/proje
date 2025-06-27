@@ -2,9 +2,12 @@ from flask import Flask, render_template, request, redirect, url_for, session, s
 import os
 from werkzeug.utils import secure_filename
 import json
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = 'cok-gizli-bir-anahtar'  # Güvenlik için değiştirin
+app.secret_key = os.environ.get('SECRET_KEY', 'varsayilan-gizli-anahtar')
 UPLOAD_FOLDER = 'static/uploads'
 ALLOWED_EXTENSIONS = {'png', 'jpg', 'jpeg', 'gif'}
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -54,8 +57,8 @@ countdown = {
 }
 
 # --- Admin Giriş Bilgisi ---
-ADMIN_USER = 'admin'
-ADMIN_PASS = '1234'
+ADMIN_USER = os.environ.get('ADMIN_USER', 'admin')
+ADMIN_PASS = os.environ.get('ADMIN_PASS', '1234')
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin_login():
